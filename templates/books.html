@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Available Books{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Available Books for Swap</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Search Bar -->
+    <input class="form-control mb-3" type="text" id="searchInput" placeholder="Search books...">
+
+    <!-- Books Grid -->
+    <div class="row">
+        {% for book in books %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    {% if book.image_url %}
+                        <img src="{{ url_for('static', filename=book.image_url) }}" class="card-img-top img-fluid book-cover" alt="{{ book.title }}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/default-book.png') }}" class="card-img-top img-fluid book-cover" alt="Default Cover">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+                        <p class="card-text"><strong>Owner:</strong> {{ book.owner }}</p>
+                        <p class="card-text"><strong>Genre:</strong> {{ book.genre }}</p>
+                        <p class="card-text"><strong>Condition:</strong> {{ book.book_condition if book.book_condition else "Not specified" }}</p>
+                        
+                        <!-- View Details Button -->
+                        <div class="text-center">
+                            <a href="{{ url_for('book_details', book_id=book.id) }}" class="btn btn-info">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- JavaScript: Search Filter -->
+<script>
+document.getElementById("searchInput").addEventListener("keyup", function() {
+    let filter = this.value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+        let title = card.querySelector(".card-title").textContent.toLowerCase();
+        let author = card.querySelector(".card-text").textContent.toLowerCase();
+        card.style.display = title.includes(filter) || author.includes(filter) ? "" : "none";
+    });
+});
+</script>
+
+<!-- CSS for Consistent Image Sizing -->
+<style>
+.book-cover {
+    max-height: 220px;
+    object-fit: cover;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="text-center">Register</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Registration Form -->
+        <form id="register-form" action="{{ url_for('register') }}" method="POST" class="p-4 border rounded bg-light">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript: Auto-dismiss Flash Messages & Clear Form -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Auto-dismiss flash messages after 3 seconds
+    setTimeout(function() {
+        let alerts = document.querySelectorAll(".alert");
+        alerts.forEach(alert => alert.classList.add("fade"));
+        setTimeout(() => {
+            alerts.forEach(alert => alert.remove());
+        }, 500);
+    }, 3000);
+
+    // Automatically reset form fields after submission
+    setTimeout(function() {
+        document.getElementById("register-form").reset();
+    }, 2000);  // Clears form after 2 seconds
+});
+</script>
+
+{% endblock %}

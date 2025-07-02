@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Terms of Service | BookSwap{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Terms of Service</h1>
+    <p>By using BookSwap, you agree to the following terms. We ask that you read them carefully—it's all about creating a respectful and enjoyable experience for everyone.</p>
+
+    <h4>1. User Responsibilities</h4>
+    <p>Please provide accurate information, treat fellow users with respect, and only list books you truly intend to exchange.</p>
+
+    <h4>2. Account Management</h4>
+    <p>You’re responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</p>
+
+    <h4>3. Content Ownership</h4>
+    <p>You retain ownership of the content you post. By listing books or submitting messages, you grant us limited permission to display and manage that content within the platform.</p>
+
+    <h4>4. Prohibited Activities</h4>
+    <ul>
+        <li>No spam, harassment, or abusive behavior</li>
+        <li>No illegal, harmful, or misleading content</li>
+        <li>Respect copyright and intellectual property</li>
+    </ul>
+
+    <h4>5. Termination</h4>
+    <p>We reserve the right to suspend or delete accounts that violate these terms to maintain the safety and integrity of the community.</p>
+
+    <h4>6. Changes to Terms</h4>
+    <p>We may update these terms from time to time. We'll do our best to notify users of significant changes.</p>
+
+    <h4>Contact</h4>
+    <p>If you have questions or concerns about these terms, you’re always welcome to <a href="{{ url_for('contact') }}">get in touch</a>.</p>
+</div>
+{% endblock %}

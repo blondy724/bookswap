@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Book Swap{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section d-flex flex-column align-items-center justify-content-center text-center text-white"
+     style="height: 100vh; background-image: url('{{ url_for('static', filename='images/book.jpg') }}'); background-size: cover; position: relative;">
+    <!-- Overlay for Text Readability -->
+    <div class="overlay" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: rgba(0, 0, 0, 0.6);"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content" style="z-index: 2;">
+        <h1 style="font-size: 3rem; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);">Welcome to the Book Swap Platform</h1>
+        <p style="font-size: 1.5rem; margin-top: 1rem; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">Swap books with other users and explore new stories!</p>
+    </div>
+</div>
+
+<!-- Buttons Below Hero Section -->
+<div class="text-center mt-4">
+    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Get Started</a>
+    <a href="{{ url_for('login') }}" class="btn btn-secondary btn-lg">Login</a>
+</div>
+{% endblock %}
